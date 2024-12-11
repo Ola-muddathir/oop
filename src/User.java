@@ -1,7 +1,7 @@
 
 import java.util.*;
-public class User {
-
+public  class User extends Vaildation {
+    private static final String EMAIL = "^[a-zA-Z0-9_+&-]+(?:\\.[a-zA-Z0-9_+&-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
     Scanner scanner = new Scanner(System.in);
     protected String username;
     private String Password;
@@ -28,11 +28,11 @@ public class User {
         return username;
     }
 
-    public void setU_password() {
+    public void setPassword() {
         this.Password = Password;
     }
 
-    public String getU_password() {
+    public String geTPassword() {
         return Password;
 
     }
@@ -63,24 +63,33 @@ public class User {
 
 
     public User Register() {
-
-        System.out.println("username");
+        boolean vaild = false;
+        System.out.print("  Username :");
         username = scanner.next();
-        System.out.println("Email ");
+        System.out.print("  Email : ");
         Email = scanner.next();
-        System.out.println("Password");
-        System.out.println("Enter atleast 8 characters");
+        vaildemail(Email);
+        while (!vaildemail(Email)) {
+            System.out.println("Invaild Email");
+            System.out.println("Try again");
+            System.out.print(" Enter Email :");
+            Email = scanner.next();
+
+        }
+        System.out.println(" Password");
+        System.out.print(" Enter Atleast 8 charactors :");
         Password = scanner.next();
-        System.out.println("Address");
+        System.out.print("   Address :");
         Address = scanner.next();
         if (Email.isEmpty()) {
-            System.out.println("Invail Passwprd ");
+            System.out.println(" Invaild Password ");
             if (Password.isEmpty())
-                System.out.println("Invail Passwprd ");
+                System.out.println(" Invaild Password ");
             if (username.equals(username)) {
                 System.out.println("Username already taken.");
 
             }
+
 
         }
 
@@ -89,19 +98,19 @@ public class User {
     }
 
     public boolean login() {
+        System.out.print("Enter username :");
+        String CorrectUsername = scanner.next();
+        System.out.print("Enter Password :");
+        String  CorrectPassword= scanner.next();
 
-        System.out.println("Enter username ");
-        String correct_username = scanner.next();
-        System.out.println("Enter Password");
-        String correct_password = scanner.next();
         boolean stat = false;
         do {
 
-            if (correct_username.equals(username) && correct_password.equals(Password)) {
-                System.out.println("Login successful");
+            if (CorrectUsername.equals(username) && CorrectPassword.equals(Password)) {
+                System.out.println("Login successful !!!");
                 stat = true;
             } else {
-                System.out.println("Invild username or password ");
+                System.out.println("Invaild username or password ");
                 System.out.println("try again ");
             }
         } while (stat = false);
@@ -110,41 +119,48 @@ public class User {
     }
 
     public boolean update(String newEmail, String newAddress) {
-        boolean up = false;
+        boolean updated = false;
         this.Email = newEmail;
         this.Address = newAddress;
+        System.out.print("Enter new Email : ");
+        newEmail = scanner.next();
+        vaildemail(newEmail);
+        while (!vaildemail(Email)) {
+            System.out.println("Invaild Email");
+            System.out.println("Try again");
+            System.out.print(" Enter new Email :");
+            Email = scanner.next();
+        }
+        System.out.print("Enter new Address : ");
+        newAddress = scanner.next();
         if (newEmail.isEmpty()) {
             System.out.println("Error: Email cannot be empty.");
         } else {
             this.Email = newEmail;
-            up = true;
-            System.out.println("Profile updated successfully.");
+            updated = true;
+
         }
         if (newAddress.isEmpty()) {
             System.out.println("Error: Delivery address cannot be empty.");
         } else {
             this.Address = newAddress;
-            up = true;
+            updated = true;
         }
-        if (up) {
-            System.out.println("Information updated successfully.");
+        if (updated) {
+            System.out.println(" Profile updated successfully.");
         } else {
-            System.out.println("Information update failed. No changes were made.");
+            System.out.println(" Profile update failed. No changes were made.");
         }
-
-        return up;
+        return updated;
     }
 
     public void viewOrders() {
-        if (orders.isEmpty())
-        {
-            System.out.println("No previous orders yet.");
+        if (orders.isEmpty()) {
+            System.out.println(" No previous orders yet.");
         } else {
             for (Order order : orders) {
                 order.viewOrderDetails();
             }
         }
-
     }
-
 }

@@ -1,9 +1,10 @@
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Scanner;
+//java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
-// Class representing payment details
 class Payment {
     enum PaymentMethod {
         CREDIT_CARD,
@@ -22,10 +23,19 @@ class Payment {
 
     public boolean processPayment(double amount) {
         try {
-            System.out.println("Processing payment...");
-            System.out.println("Amount: $" + amount);
-            System.out.println("Payment Method: " + paymentMethod);
+            ArrayList <CartItem> cartItems = new ArrayList<>();
+            Order order = new Order();
+           // LocalDateTime currentTime = LocalDateTime.now();
+           // LocalDateTime newTime = currentTime.plusMinutes(30);
 
+            System.out.println("Processing payment...");
+            order.placeOrder(cartItems);
+          //  System.out.println("Amount: $" + amount);
+            System.out.println("Payment Method: " + paymentMethod);
+            DateTimeFormatter time = DateTimeFormatter.ofPattern( " HH:mm ")  ;
+          //  System.out.println("your order will arrive at " + newTime.format(formatter));
+
+            System.out.println("Delivery Address: " + order.getDeliveryAddress());
             if (paymentMethod == PaymentMethod.CREDIT_CARD) {
                 System.out.println("Processing payment via Credit/Debit Card...");
             } else if (paymentMethod == PaymentMethod.DIGITAL_WALLET) {

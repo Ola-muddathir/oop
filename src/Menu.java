@@ -28,15 +28,15 @@ class Menu {
         System.out.println("2. Category");
         System.out.print("Choose an option (1/2): ");
         int searchOption = scanner.nextInt();
-        scanner.nextLine(); // استهلاك السطر الجديد
+        scanner.nextLine();
 
         System.out.print("Enter search value: ");
-        String searchValue = scanner.nextLine().trim().toLowerCase(); // تحويل المدخلات إلى حروف صغيرة
+        String searchValue = scanner.nextLine().trim().toLowerCase();
 
         ArrayList<Dish> result = new ArrayList<>();
 
         switch (searchOption) {
-            case 1: // البحث بالاسم
+            case 1:
                 for (Dish dish : dishes) {
                     if (dish.getName().toLowerCase().contains(searchValue)) {
                         result.add(dish);
@@ -44,7 +44,7 @@ class Menu {
                 }
                 break;
 
-            case 2: // البحث بالفئة
+            case 2:
                 for (Dish dish : dishes) {
                     if (dish.getCategory().toLowerCase().contains(searchValue)) {
                         result.add(dish);
@@ -57,7 +57,7 @@ class Menu {
                 return;
         }
 
-        // عرض نتائج البحث
+
         if (result.isEmpty()) {
             System.out.println("No dishes found matching your search.");
         } else {
